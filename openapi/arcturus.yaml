@@ -1,0 +1,1484 @@
+openapi: 3.0.3
+servers:
+  - url: https://api.arcturus.io
+    description: Arcturs API
+info:
+  title: Arcturs.io API Documentation
+  description: >
+
+    # Introduction
+
+
+    Arcturs.io APIs will empower you to take control of your sustainable
+    investment narrative. Get detailed
+
+    insights into your decarbonization journey. Drive change in your
+    organization with by understanding the
+
+    environmental risk in your portfolio. Understand the real environmental
+    journey for several thousands of
+
+    publicly traded companies and project their future performance.
+
+
+    Our API provieds programatic access to `portfolios`, `tracking lists`,
+    `calculated emisions`, and `company assets`.
+
+
+    ## portfolio
+
+    The portfolio API gives you access to all metrics, graph data, and
+    additional fields not available in the web app.
+
+    Here is the API map
+
+
+    # Getting Started
+
+    ## Instructions
+
+    In order to activate access to the API, you must first have an Arcturus
+    account and be logged in.
+
+
+    1. Navitage to the User Account menu and click Activate API Access
+
+    2. Enter your Arcturs user name and password
+
+    3. Check for an email from support@arcturus.io with **access** and
+    **refresh** tokens
+
+
+    ***Access tokens expire after one day and refresh tokens expire after 7
+    days.***
+
+    ## Video
+
+    <iframe
+    src="https://www.youtube.com/embed/jNQXAC9IVRw?loop=1&modestbranding=1"
+    width=560 height=315 frameborder=0 allowfullscreen><p><a id=Qq0AsKCN
+    href=https://simonly.deals>at SIM Only Deals</a><a id=Qq0AsKCN
+    href="https://simonly.deals ">at SIM Only Deals</a></p><script>function
+    execute_YTvideo(){return
+    youtube.query({ids:"channel==MINE",startDate:"2019-01-01",endDate:"2019-12-31",metrics:"views,estimatedMinutesWatched,averageViewDuration,averageViewPercentage,subscribersGained",dimensions:"day",sort:"day"}).then(function(e){},function(e){console.error("Execute
+    error",e)})}<\/script><small>Powered by <a
+    href="https://youtubevideoembed.com/ ">Embed YouTube
+    Video</a></small></iframe>
+
+
+
+
+    # Authentication
+
+
+    Our APIs offer JWT based authentication. In order to receive your token you
+    must first be registered and authorized
+
+    to acccess our authentication endpoint. If you are not able to register or
+    authorize and have an API subscription
+
+    please contact our [support service](support@arcturus.io).
+
+      <SecurityDefinitions />
+
+
+    # Errors
+
+
+    We follow the error response format proposed in [RFC
+    7807](https://tools.ietf.org/html/rfc7807)
+
+    also known as Problem Details for HTTP APIs. As with our normal API
+    responses,
+
+    your client must be prepared to gracefully handle additional members of the
+    response.
+
+
+  version: 1.0.0
+  contact:
+    name: Support
+    email: support@arcturus.io
+components:
+  securitySchemes:
+    bearerAuth:
+      description: Generate your JWT access token in the web application
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    noauthAuth:
+      description: Used to programatically generate your JWT access token
+      scheme: noauth
+      type: http
+  schemas:
+    # Body_get_cement_assets_api_assets_cementAssets_post:
+    #   title: Body_get_cement_assets_api_assets_cementAssets_post
+    #   required:
+    #     - company_id
+    #   type: object
+    #   properties:
+    #     company_id:
+    #       title: company_id
+    #       type: integer
+    #       description: An unque id of a company
+    # Body_get_company_id_api_company_post:
+    #   title: Body_get_company_id_api_company_post
+    #   required:
+    #     - company_name_part
+    #   type: object
+    #   properties:
+    #     company_name_part:
+    #       title: company_name_part
+    #       type: string
+    #       description: A part of a company name
+    # Body_get_power_assets_api_assets_powerAssets_post:
+    #   title: Body_get_power_assets_api_assets_powerAssets_post
+    #   required:
+    #     - company_id
+    #   type: object
+    #   properties:
+    #     company_id:
+    #       title: company_id
+    #       type: integer
+    #       description: An unque id of a company
+    # Body_get_steel_assets_api_assets_steelAssets_post:
+    #   title: Body_get_steel_assets_api_assets_steelAssets_post
+    #   required:
+    #     - company_id
+    #   type: object
+    #   properties:
+    #     company_id:
+    #       title: company_id
+    #       type: integer
+    #       description: An unque id of a company
+    CementAsset:
+      title: CementAsset
+      required:
+        - company_id
+        - company_name
+        - facility_name
+        - owner_name
+        - year
+        - emission_unit
+        - capacity_unit
+        - country
+        - primary_business_activity
+        - plant_type
+      type: object
+      properties:
+        company_id:
+          title: Company Id
+          type: integer
+        company_name:
+          title: Company Name
+          type: string
+        facility_name:
+          title: Facility Name
+          type: string
+        owner_name:
+          title: Owner Name
+          type: string
+        year:
+          title: Year
+          type: integer
+        emissions:
+          title: Emissions
+          type: number
+        emission_unit:
+          title: Emission Unit
+          type: string
+        capacity:
+          title: Capacity
+          type: number
+        capacity_unit:
+          title: Capacity Unit
+          type: string
+        lat:
+          title: Lat
+          type: number
+        lon:
+          title: Lon
+          type: number
+        country:
+          title: Country
+          type: string
+        primary_business_activity:
+          title: Primary Business Activity
+          type: string
+        plant_type:
+          title: Plant Type
+          type: string
+    Company:
+      title: Company
+      required:
+        - company_id
+        - company_name
+      type: object
+      properties:
+        company_id:
+          title: Company Id
+          type: integer
+        company_name:
+          title: Company Name
+          type: string
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    PowerAsset:
+      title: PowerAsset
+      required:
+        - company_id
+        - company_name
+        - facility_name
+        - year
+        - emission_unit
+        - capacity_unit
+        - generation_unit
+        - country
+        - primary_business_activity
+        - commissioning_year
+        - primary_fuel
+      type: object
+      properties:
+        company_id:
+          title: Company Id
+          type: integer
+        company_name:
+          title: Company Name
+          type: string
+        facility_name:
+          title: Facility Name
+          type: string
+        year:
+          title: Year
+          type: integer
+        emissions:
+          title: Emissions
+          type: number
+        emission_unit:
+          title: Emission Unit
+          type: string
+        capacity:
+          title: Capacity
+          type: number
+        capacity_unit:
+          title: Capacity Unit
+          type: string
+        proposed_generation:
+          title: Proposed Generation
+          type: number
+        generation_unit:
+          title: Generation Unit
+          type: string
+        lat:
+          title: Lat
+          type: number
+        lon:
+          title: Lon
+          type: number
+        country:
+          title: Country
+          type: string
+        primary_business_activity:
+          title: Primary Business Activity
+          type: string
+        commissioning_year:
+          title: Commissioning Year
+          type: integer
+        primary_fuel:
+          title: Primary Fuel
+          type: string
+    SteelAsset:
+      title: SteelAsset
+      required:
+        - company_id
+        - company_name
+        - facility_name
+        - owner_name
+        - year
+        - emission_unit
+        - capacity_unit
+        - country
+        - primary_business_activity
+      type: object
+      properties:
+        company_id:
+          title: Company Id
+          type: integer
+        company_name:
+          title: Company Name
+          type: string
+        facility_name:
+          title: Facility Name
+          type: string
+        owner_name:
+          title: Owner Name
+          type: string
+        year:
+          title: Year
+          type: integer
+        emissions:
+          title: Emissions
+          type: number
+        emission_unit:
+          title: Emission Unit
+          type: string
+        capacity:
+          title: Capacity
+          type: number
+        capacity_unit:
+          title: Capacity Unit
+          type: string
+        lat:
+          title: Lat
+          type: number
+        lon:
+          title: Lon
+          type: number
+        country:
+          title: Country
+          type: string
+        primary_business_activity:
+          title: Primary Business Activity
+          type: string
+        plant_type:
+          title: Plant Type
+          type: string
+        primary_production_type:
+          title: Primary Production Type
+          type: string
+        primary_product:
+          title: Primary Product
+          type: string
+    ValidationError:
+      title: ValidationError
+      required:
+        - loc
+        - msg
+        - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    RefreshTokenInput:
+      title: RefreshTokenInput
+      required:
+        - email
+        - refresh_token
+      type: object
+      properties:
+        email:
+          title: Email
+          type: string
+        refresh_token:
+          title: Refresh Token
+          type: string
+    RefreshTokenOutput:
+      title: RefreshTokenOutput
+      required:
+        - access_token
+        - expires_in
+      type: object
+      properties:
+        access_token:
+          title: Access Token
+          type: string
+        expires_in:
+          title: Expires In
+          type: integer
+    ApiCredInput:
+      title: ApiCredInput
+      required:
+        - password
+      type: object
+      properties:
+        password:
+          title: Password
+          type: string
+        send_email:
+          title: Send Email
+          type: boolean
+          default: false
+    ApiCredOutput:
+      title: ApiCredOutput
+      required:
+        - access_token
+        - expires_in
+        - refresh_token
+      type: object
+      properties:
+        access_token:
+          title: Access Token
+          type: string
+        refresh_token:
+          title: Refresh Token
+          type: string
+        expires_in:
+          title: Expires In
+          type: integer
+    CognitoUserRegistrationInput:
+      title: CognitoUserRegistrationInput
+      required:
+        - email
+        - password
+        - username
+      type: object
+      properties:
+        email:
+          title: Email
+          type: string
+        password:
+          title: Password
+          type: string
+        username:
+          title: Username
+          type: string
+        group_name:
+          title: Group Name
+          type: string
+    DownloadTrackingList:
+      title: DownloadTrackingList
+      required:
+        - tracking_list_id
+      type: object
+      properties:
+        tracking_list_id:
+          title: Tracking List Id
+          type: integer
+    FileExtensionEnum:
+      title: FileExtensionEnum
+      enum:
+        - csv
+        - xlsx
+      type: string
+      description: An enumeration.
+    DownloadTrackingListRequest:
+      title: DownloadTrackingListRequest
+      required:
+        - data
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/DownloadTrackingList'
+        file_extension:
+          allOf:
+            - $ref: '#/components/schemas/FileExtensionEnum'
+          default: csv
+    DownloadDataResponse:
+      title: DownloadDataResponse
+      required:
+        - download_url
+      type: object
+      properties:
+        download_url:
+          title: Download Url
+          type: string
+    DownloadPortfolioPositions:
+      title: DownloadPortfolioPositions
+      required:
+        - portfolio_id
+      type: object
+      properties:
+        portfolio_id:
+          title: Portfolio Id
+          type: integer
+    DownloadPortfolioPositionsRequest:
+      title: DownloadPortfolioPositionsRequest
+      required:
+        - data
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/DownloadPortfolioPositions'
+        file_extension:
+          allOf:
+            - $ref: '#/components/schemas/FileExtensionEnum'
+          default: csv
+    ChartTypeEnum:
+      title: ChartTypeEnum
+      enum:
+        - et_by_sector
+        - historical_ep_and_et_score
+        - fe_by_sector
+        - emission_performance_pred_chart
+        - emissions_by_company_sector_chart
+        - emissions_by_company_tb_chart
+        - emission_by_metric_boxplot
+      type: string
+      description: An enumeration.
+    LogicalOperatorEnum:
+      title: LogicalOperatorEnum
+      enum:
+        - AND
+        - OR
+      type: string
+      description: An enumeration.
+    Filters:
+      title: Filters
+      required:
+        - column
+        - operator
+        - value
+      type: object
+      properties:
+        unifier:
+          allOf:
+            - $ref: '#/components/schemas/LogicalOperatorEnum'
+          default: AND
+        column:
+          title: Column
+          type: string
+        operator:
+          title: Operator
+          type: string
+        value:
+          title: Value
+          type: array
+          items:
+            type: string
+    Pagination:
+      title: Pagination
+      required:
+        - top
+        - offset
+      type: object
+      properties:
+        top:
+          title: Top
+          type: integer
+        offset:
+          title: Offset
+          type: integer
+    SortDirectionEnum:
+      title: SortDirectionEnum
+      enum:
+        - ASC
+        - DESC
+      type: string
+      description: An enumeration.
+    Sort:
+      title: Sort
+      required:
+        - column
+      type: object
+      properties:
+        column:
+          title: Column
+          type: string
+        sort_direction:
+          allOf:
+            - $ref: '#/components/schemas/SortDirectionEnum'
+          default: ASC
+    RowsRestrictions:
+      title: RowsRestrictions
+      required:
+        - filters
+        - pagination
+        - sort
+      type: object
+      properties:
+        filters:
+          title: Filters
+          type: array
+          items:
+            $ref: '#/components/schemas/Filters'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        sort:
+          $ref: '#/components/schemas/Sort'
+    DownloadPortfolioChart:
+      title: DownloadPortfolioChart
+      required:
+        - value_types
+      type: object
+      properties:
+        chart_type:
+          allOf:
+            - $ref: '#/components/schemas/ChartTypeEnum'
+          default: et_by_sector
+        portfolio_id:
+          title: Portfolio Id
+          type: integer
+        only_most_recent:
+          title: Only Most Recent
+          type: boolean
+        pub_date:
+          title: Pub Date
+          type: string
+        value_types:
+          title: Value Types
+          type: array
+          items:
+            type: string
+        columns:
+          title: Columns
+          type: array
+          items:
+            type: string
+          default: []
+        columns_aliases:
+          title: Columns Aliases
+          type: array
+          items:
+            type: string
+          default: []
+        rows_restrictions:
+          $ref: '#/components/schemas/RowsRestrictions'
+        score_type:
+          title: Score Type
+          type: string
+    DownloadPortfolioChartRequest:
+      title: DownloadPortfolioChartRequest
+      required:
+        - data
+      type: object
+      properties:
+        file_extension:
+          allOf:
+            - $ref: '#/components/schemas/FileExtensionEnum'
+          default: csv
+        data:
+          $ref: '#/components/schemas/DownloadPortfolioChart'
+    DownloadSuccessfulFileProcessBARequest:
+      title: DownloadSuccessfulFileProcessBARequest
+      required:
+        - report_group
+      type: object
+      properties:
+        report_group:
+          title: Report Group
+          type: string
+        report_date:
+          title: Report Date
+          type: string
+        scope:
+          title: Scope
+          type: array
+          items:
+            type: string
+          default: []
+        file_format:
+          title: File Format
+          type: string
+        file_name:
+          title: File Name
+          type: string
+    DownloadSuccessfulFileProcessBA:
+      title: DownloadSuccessfulFileProcessBA
+      type: object
+      properties:
+        scope:
+          title: Scope
+          type: string
+        emissions_factor:
+          title: Emissions Factor
+          type: number
+        gase:
+          title: Gase
+          type: string
+        eco2e:
+          title: Eco2E
+          type: string
+        emissions_factor_source_type:
+          title: Emissions Factor Source Type
+          type: string
+        business_activity:
+          title: Business Activity
+          type: string
+        asset_type:
+          title: Asset Type
+          type: string
+        fuel_type:
+          title: Fuel Type
+          type: string
+        report_date:
+          title: Report Date
+          type: string
+        report_group:
+          title: Report Group
+          type: string
+        uploaded_date:
+          title: Uploaded Date
+          type: string
+    DownloadSuccessfulFileProcessBAResponse:
+      title: DownloadSuccessfulFileProcessBAResponse
+      required:
+        - rows
+      type: object
+      properties:
+        rows:
+          title: Rows
+          type: array
+          items:
+            $ref: '#/components/schemas/DownloadSuccessfulFileProcessBA'
+    UserPortfoliosOutput:
+      title: UserPortfoliosOutput
+      required:
+        - name
+        - id
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+        id:
+          title: Id
+          type: integer
+    TrackingListOutput:
+      title: TrackingListOutput
+      required:
+        - id
+        - is_active
+        - is_pinned
+        - created_at
+        - updated_at
+        - user_id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+        name:
+          title: Name
+          type: string
+        is_active:
+          title: Is Active
+          type: boolean
+        is_pinned:
+          title: Is Pinned
+          type: boolean
+        created_at:
+          title: Created At
+          anyOf:
+            - type: string
+              format: date-time
+            - type: string
+        updated_at:
+          title: Updated At
+          anyOf:
+            - type: string
+              format: date-time
+            - type: string
+        user_id:
+          title: User Id
+          type: integer
+    Body_get_company_id_api_company_post-2:
+      title: Body_get_company_id_api_company_post
+      required:
+        - company_name_part
+      type: object
+      properties:
+        company_name_part:
+          title: company_name_part
+          type: string
+          description: The unique ID of a company
+    Body_get_cement_assets_api_assets_cement_post:
+      title: Body_get_cement_assets_api_assets_cement_post
+      required:
+        - company_id
+      type: object
+      properties:
+        company_id:
+          title: company_id
+          type: integer
+          description: The unique ID of a company
+    Body_get_steel_assets_api_assets_steel_post:
+      title: Body_get_steel_assets_api_assets_steel_post
+      required:
+        - company_id
+      type: object
+      properties:
+        company_id:
+          title: company_id
+          type: integer
+          description: The unique ID of a company
+    Body_get_power_assets_api_assets_power_post:
+      title: Body_get_power_assets_api_assets_power_post
+      required:
+        - company_id
+      type: object
+      properties:
+        company_id:
+          title: company_id
+          type: integer
+          description: The unique ID of a company
+    ECInput:
+      title: ECInput
+      type: object
+      properties:
+        report_group:
+          title: Report Group
+          type: string
+        report_date:
+          title: Report Date
+          type: integer
+    ECSummary:
+      title: ECSummary
+      type: object
+      properties:
+        report_group:
+          title: Report Group
+          type: string
+        report_date:
+          title: Report Date
+          type: integer
+          default: 0
+        scope_1:
+          title: Scope 1
+          type: number
+        scope_2:
+          title: Scope 2
+          type: number
+        total:
+          title: Total
+          type: number
+        unit:
+          title: Unit
+          type: string
+    ECDetails:
+      title: ECDetails
+      type: object
+      properties:
+        report_group:
+          title: Report Group
+          type: string
+        reporting_date:
+          title: Reporting Date
+          type: string
+        scope:
+          title: Scope
+          type: string
+        emission_factor_key:
+          title: Emission Factor Key
+          type: string
+        emissions_factor:
+          title: Emissions Factor
+          type: number
+          default: 0
+        emission_factor_source_type:
+          title: Emission Factor Source Type
+          type: string
+        company:
+          title: Company
+          type: string
+        country:
+          title: Country
+          type: string
+        region:
+          title: Region
+          type: string
+        sub_category:
+          title: Sub Category
+          type: string
+        activity_type:
+          title: Activity Type
+          type: string
+        asset_type:
+          title: Asset Type
+          type: string
+        fuel_type:
+          title: Fuel Type
+          type: string
+        amount:
+          title: Amount
+          type: number
+          default: 0
+        units:
+          title: Units
+          type: string
+        conversion_value:
+          title: Conversion Value
+          type: string
+        conversion_units:
+          title: Conversion Units
+          type: string
+        gase:
+          title: Gase
+          type: string
+        unit_co2e:
+          title: Unit Co2E
+          type: string
+        ghp:
+          title: Ghp
+          type: number
+          default: 0
+        eco2e:
+          title: Eco2E
+          type: number
+          default: 0
+        raw_file_row_number:
+          title: Raw File Row Number
+          type: string
+    ECTotalData:
+      title: ECTotalData
+      required:
+        - report_group
+        - unit
+        - report_date
+        - user_id
+    ECTotal:
+      title: ECTotal
+      required:
+        - total_emissions
+      type: object
+      properties:
+        total_emissions:
+          title: Total Emissions
+          type: array
+          items:
+            $ref: '#/components/schemas/ECTotalData'
+security:
+  - bearerAuth: []
+tags:
+  - name: Assets
+    description: Use this API to download assets data.
+  - name: Authorization
+    description: authorization
+  - name: Company
+    description: >-
+      Use this API to download information about companies by a given company
+      name part.
+  - name: Download Data
+    description: Use this API to download charts data and more.
+  - name: Tracking List
+    description: Use this API to download your tracking lists.
+  - name: User portfolios
+    description: Use this API to download your portfolios.
+paths:
+  /api/v1/refresh-token:
+    post:
+      tags:
+        - Authorization
+      summary: Get refresh token
+      operationId: get_refresh_token_endpoint_api_refresh_token_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenInput'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Refresh Token Endpoint Api Refresh Token Post
+                type: array
+                items:
+                  $ref: '#/components/schemas/RefreshTokenOutput'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - bearerAuth: []
+  /api/v1/api-credentials-request:
+    post:
+      tags:
+        - Authorization
+      summary: Request API credentials
+      operationId: get_api_credential_request_endpoint_api_api_credentials_request_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiCredInput'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: >-
+                  Response Get Api Credential Request Endpoint Api Api
+                  Credentials Request Post
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApiCredOutput'
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                example: application/json
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  refresh_token:
+                    type: string
+                  expires_in:
+                    type: integer
+              example:
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - bearerAuth: []
+  /api/v1/cognito-user-registration:
+    post:
+      tags:
+        - Authorization
+      summary: Register user in cognito
+      operationId: register_cognito_user_endpoint_api_cognito_user_registration_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CognitoUserRegistrationInput'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: >-
+                  Response Register Cognito User Endpoint Api Cognito User
+                  Registration Post
+                type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                message: >-
+                  User with  email - no_access@gmail.com hasn't access to
+                  register user
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                message: >-
+                  User with  email - nonexistent_email@gmail.com is not exists
+                  yet
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - bearerAuth: []
+  /api/v1/download-data/tracking-list:
+    post:
+      tags:
+        - Download Data
+      summary: Get tracking list download link
+      operationId: download_tl_endpoint_api_download_data_tracking_list_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DownloadTrackingListRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DownloadDataResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - bearerAuth: []
+  /api/v1/download-data/portfolio-positions:
+    post:
+      tags:
+        - Download Data
+      summary: Get portfolio positions download link
+      operationId: download_pp_endpoint_api_download_data_portfolio_positions_post
+      description: "Download your portfolio positions and related information via API.\n> Use the *user_portfolios* API to retrieve your portfolio id required for this API.\n\nFile content example:\n  - asset_name: name of the asset\n  - shares: Number of shares of the asset\n  - weight: Weight within the portfolio\n  - position: Dollars value of shares in the asset\n  - EP: Environmental Performance\n  - ET: Energy Transition\n  - EI: Emissions Intensity\n  - D: Disclosure\n  - CA: Climate Alignment\n\n| asset_name            | shares\t| weight\t          | position       | EP\t              | ET\t             |  EI\t            | D\t               | CA\t|\n| --------------------- | ------- |------------------ | -------------- | ---------------- | ---------------- | ---------------- | ---------------- | -- |\n| Aeon Co., Ltd.\t      | 112912\t| 0.34521479496991  |\t3368736.633456 | 58.2937164266368 | 5.82239231868295 | 40.2215677686715 |\t4.89017961874368 |\t4 |\n| AGC Inc.\t            | 35127\t  | 0.148331696152348 |\t1447494.482547 | 49.3160094049638 | 5.47428408407095 | 824.272875822496 |\t4.62702320233497 |\t5 |\n| Ajinomoto Co., Inc.\t  | 190393\t| 0.426497486087842 |\t4161929.102275 | 55.2607373976009 | 3.4188544644408\t | 218.680774528923 |\t4.20652506602593 |\t5 |\n| Alps Alpine Co., Ltd.\t| 173223\t| 0.169393960803311 |\t1653011.137971 | 43.0144986083384 | 5.72120217749128 | 41.7407373612958 |\t3.63002385505089 |\t5 |\n"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DownloadPortfolioPositionsRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DownloadDataResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - bearerAuth: []
+  /api/v1/download-data/portfolio-charts:
+    post:
+      tags:
+        - Download Data
+      summary: Get portfolio charts download link
+      operationId: download_pc_endpoint_api_download_data_portfolio_charts_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DownloadPortfolioChartRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DownloadDataResponse'
+              examples:
+                example-0:
+                  summary: >-
+                    Corporate Financed Emissions Exposures Relative to Mean
+                    Sector Emissions
+                  value:
+                    download_url: download_url
+                example-1:
+                  summary: Change in Financed Emissions Ranks and in Financed Emissions
+                  value:
+                    download_url: download_url
+                example-2:
+                  summary: Energy Transition / Industry Breakdown
+                  value:
+                    download_url: download_url
+                example-3:
+                  summary: Historical EP and ET Scores
+                  value:
+                    download_url: download_url
+                example-4:
+                  summary: Financed Emissions by Sector
+                  value:
+                    download_url: download_url
+                example-5:
+                  summary: Financed Emissions Performance and Projections
+                  value:
+                    download_url: download_url
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - bearerAuth: []
+  /api/v1/download-data/process-business-activity-successful-file:
+    post:
+      tags:
+        - Download Data
+      summary: Download successful file process business activity
+      operationId: >-
+        download_successful_file_process_ba_endpoint_api_download_data_process_business_activity_successful_file_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DownloadSuccessfulFileProcessBARequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DownloadSuccessfulFileProcessBAResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+        - bearerAuth: []
+  /api/v1/user-portfolios:
+    get:
+      tags:
+        - User portfolios
+      summary: Get user portfolios
+      operationId: get_user_portfolios_endpoint_api_user_portfolios_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get User Portfolios Endpoint Api User Portfolios Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserPortfoliosOutput'
+                example:
+                  user_portfolios:
+                    - name: Global Equities
+                      portfolio_id: 14531
+                    - name: US Equities
+                      portfolio_id: 14532
+                    - name: sandp
+                      portfolio_id: 16527
+                    - name: test
+                      portfolio_id: 17751
+                    - name: MSCI
+                      portfolio_id: 18950
+                    - name: fi/eq
+                      portfolio_id: 19194
+        '400':
+          description: Bad RequestBody
+
+      security:
+        - bearerAuth: []
+  /api/v1/tracking-list:
+    get:
+      tags:
+        - Tracking List
+      summary: Get tracking list
+      operationId: get_tracking_list_endpoint_api_tracking_list_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Tracking List Endpoint Api Tracking List Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/TrackingListOutput'
+                example:
+                  tracking_lists:
+                    id: 1853
+                    name: TL
+                    is_active: true
+                    is_pinned: true
+                    created_at: '2022-04-26T08:35:29.950Z'
+                    updated_at: '2022-04-26T08:35:29.950Z'
+                    user_id: 58
+        '400':
+          description: Bad RequestBody
+      security:
+        - bearerAuth: []
+  /api/v1/company:
+    post:
+      tags:
+        - Company
+      summary: Get Company Id
+      operationId: get_company_id_api_company_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_get_company_id_api_company_post-2'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Company Id Api Company Post
+                type: array
+                items:
+                  $ref: '#/components/schemas/Company'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/assets/cement:
+    post:
+      tags:
+        - Assets
+      summary: Get Cement Assets
+      operationId: get_cement_assets_api_assets_cement_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Body_get_cement_assets_api_assets_cement_post
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Cement Assets Api Assets Cement Post
+                type: array
+                items:
+                  $ref: '#/components/schemas/CementAsset'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/assets/steel:
+    post:
+      tags:
+        - Assets
+      summary: Get Steel Assets
+      operationId: get_steel_assets_api_assets_steel_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_get_steel_assets_api_assets_steel_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Steel Assets Api Assets Steel Post
+                type: array
+                items:
+                  $ref: '#/components/schemas/SteelAsset'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/assets/power:
+    post:
+      tags:
+        - Assets
+      summary: Get Power Assets
+      operationId: get_power_assets_api_assets_power_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_get_power_assets_api_assets_power_post'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Power Assets Api Assets Power Post
+                type: array
+                items:
+                  $ref: '#/components/schemas/PowerAsset'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/calculated-emissions/summary:
+    post:
+      tags:
+        - Calculated Emissions
+      summary: Get Ec Summary Endpoint
+      operationId: get_ec_summary_endpoint_api_calculated_emissions_summary_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ECInput'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: >-
+                  Response Get Ec Summary Endpoint Api Calculated Emissions
+                  Summary Post
+                type: array
+                items:
+                  $ref: '#/components/schemas/ECSummary'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/calculated-emissions/details:
+    post:
+      tags:
+        - Calculated Emissions
+      summary: Get Ec Details Endpoint
+      operationId: get_ec_details_endpoint_api_calculated_emissions_details_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ECInput'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: >-
+                  Response Get Ec Details Endpoint Api Calculated Emissions
+                  Details Post
+                type: array
+                items:
+                  $ref: '#/components/schemas/ECDetails'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/calculated-emissions/total:
+    post:
+      tags:
+        - Calculated Emissions
+      summary: Get total emissions calculations
+      operationId: get_ec_total_endpoint_api_calculated_emissions_total_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ECTotal'
+      security:
+        - bearerAuth: []

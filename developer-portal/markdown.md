@@ -43,9 +43,8 @@ You can create a link to it.
 
 To do that, you can edit this `markdown.md` file and remove the back ticks around this example.
 
-```markdown
+markdown
 [My first plain markdown page!](plain.md)
-```
 
 (And save your file.)
 
@@ -134,3 +133,4 @@ You made a new file.
 It ended with the `.md` file extension.
 The name could be seen in the URL path in the browser bar (the full path includes any folders it is in).
 You included images and videos on your page.
+
