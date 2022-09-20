@@ -1,6 +1,6 @@
 training:
   - page: developer-portal/index.md
-  - group: Training exercises
+  - group: Documentation
     expanded: true
     pages:
       - label: Setup
@@ -38,7 +38,7 @@ training:
         page: developer-portal/mdx.mdx
       - label: Creating React components
         page: developer-portal/custom-component.mdx
-  - group: API Reference Docs
+  - group: API Reference
     expanded: false
     pages:
       - page: openapi/arcturus.yaml

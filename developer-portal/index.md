@@ -1,19 +1,13 @@
 ---
-title: Training program
+title: Home
 ---
 
-# Training program
+# Introduction
+Arcturs.io APIs will empower you to take control of your sustainable investment narrative. Get detailed insights into your decarbonization journey. Drive change in your organization with by understanding the environmental risk in your portfolio. Understand the real environmental journey for several thousands of publicly traded companies and project their future performance.
 
-This interactive training program is designed to help you understand how to create and edit content using Redocly's developer portal.
-It's a great companion to our [developer portal docs](https://docs.redoc.ly/developer-portal/introduction/).
-
-Spend between an hour and a day playing with the most commonly utilized features.
-
-## Prerequisites
-- Basic Git and markdown knowledge
-- Node and yarn installed
-- A text editor or IDE (we like VS Code)
-- [Setup the developer portal](setup.md)
+Our API provieds programatic access to portfolios, tracking lists, calculated emisions, and company assets.
+## API Architecture
+Our APIs are serverless
 
 ## Training exercises
 

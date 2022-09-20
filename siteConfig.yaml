@@ -1,6 +1,6 @@
 meta:
-  title: Redocly Training
-  description: The best API documentation generator ever.
+  title: Arcturus IO
+  description: The best sustainability analytics around.
   siteUrl: https://developer-portal-starter.redoc.ly
   keywords: redocly developer portal, api portal starter, api reference docs
   lang: en-US
@@ -10,15 +10,14 @@ linkChecker:
     CheckExternal: false
 logo:
   image: ./images/logo.png
-  altText: Redocly Training
+  altText: Arcturus API Documentation
 toc:
   enable: true
 oasDefinitions:
-  # arcturus: ./openapi/arcturus.yaml
   arcturus: ./openapi/arcturus.yaml
   # add links to definitions in our API registry by using a fully qualified URL.
 stylesheets:
-  - https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=swap
+  # - https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=swap
   - https://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,600,700&display=swap
 #analytics:
   # ga:
@@ -28,12 +27,12 @@ stylesheets:
 #  - ./static/intercom.js
 nav:
 
-  - label: Training exercises
+  - label: API Documentation
     page: developer-portal/index.md
 
-  - label: External docs
-    icon: ./images/redocly-icon-white.png
-    href: https://redoc.ly/docs/developer-portal/introduction/
+  # - label: External docs
+  #   icon: ./images/redocly-icon-white.png
+  #   href: https://redoc.ly/docs/developer-portal/introduction/
 
   - search: true
 
